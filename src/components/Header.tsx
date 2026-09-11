@@ -17,6 +17,22 @@ interface HeaderProps {
   compact?: boolean;
 }
 
+const GITHUB_URL = "https://github.com/scifisatan/electromagnetics";
+
+function GithubIcon({ size = 16 }: { size?: number }) {
+  return (
+    <svg
+      aria-hidden="true"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+    >
+      <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.082-.73.082-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.303-5.466-1.332-5.466-5.93 0-1.31.468-2.38 1.236-3.22-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.3 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.29-1.552 3.297-1.23 3.297-1.23.653 1.653.24 2.873.118 3.176.77.84 1.235 1.91 1.235 3.22 0 4.61-2.804 5.624-5.475 5.92.43.372.814 1.103.814 2.222 0 1.606-.014 2.9-.014 3.293 0 .32.216.694.825.576C20.565 21.796 24 17.3 24 12c0-6.63-5.37-12-12-12z" />
+    </svg>
+  );
+}
+
 export function Header({
   search,
   onSearchChange,
@@ -45,9 +61,21 @@ export function Header({
         {/* Top Row: Title & Search */}
         {!compact && (
           <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-            <h1 className="font-[family:var(--serif)] text-xl font-bold text-[var(--text)] whitespace-nowrap">
-              Electromagnetics <span className="text-[var(--text3)] font-normal">EX 503</span>
-            </h1>
+            <div className="flex items-center gap-3">
+              <h1 className="font-[family:var(--serif)] text-xl font-bold text-[var(--text)] whitespace-nowrap">
+                Electromagnetics <span className="text-[var(--text3)] font-normal">EX 503</span>
+              </h1>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[var(--text3)] hover:text-[var(--text)] transition-colors"
+                title="View on GitHub"
+                aria-label="View source on GitHub"
+              >
+                <GithubIcon size={18} />
+              </a>
+            </div>
 
             <div className="relative w-full md:w-64">
               <svg
@@ -118,27 +146,39 @@ export function Header({
         {/* Filters Row */}
         <div className={`flex flex-col gap-3 ${compact ? "mt-0" : "mt-1"}`}>
           {compact && (
-            <div className="relative w-full">
-              <svg
-                aria-hidden="true"
-                className="absolute top-1/2 left-2.5 -translate-y-1/2 text-[var(--text3)]"
-                fill="none"
-                height="14"
-                viewBox="0 0 24 24"
-                width="14"
-                stroke="currentColor"
-                strokeWidth="2"
+            <div className="flex items-center gap-2">
+              <div className="relative w-full">
+                <svg
+                  aria-hidden="true"
+                  className="absolute top-1/2 left-2.5 -translate-y-1/2 text-[var(--text3)]"
+                  fill="none"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  width="14"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <circle cx="11" cy="11" r="8" />
+                  <path d="m21 21-4.35-4.35" />
+                </svg>
+                <input
+                  className="w-full rounded-md border border-[var(--border)] bg-[var(--bg)] py-1.5 pr-2.5 pl-8 font-[family:var(--sans)] text-[13.5px] text-[var(--text)] outline-none transition-colors focus:border-[var(--text3)]"
+                  type="search"
+                  value={search}
+                  onChange={(event) => onSearchChange(event.target.value)}
+                  placeholder="Search..."
+                />
+              </div>
+              <a
+                href={GITHUB_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 text-[var(--text3)] hover:text-[var(--text)] transition-colors"
+                title="View on GitHub"
+                aria-label="View source on GitHub"
               >
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.35-4.35" />
-              </svg>
-              <input
-                className="w-full rounded-md border border-[var(--border)] bg-[var(--bg)] py-1.5 pr-2.5 pl-8 font-[family:var(--sans)] text-[13.5px] text-[var(--text)] outline-none transition-colors focus:border-[var(--text3)]"
-                type="search"
-                value={search}
-                onChange={(event) => onSearchChange(event.target.value)}
-                placeholder="Search..."
-              />
+                <GithubIcon size={16} />
+              </a>
             </div>
           )}
 
